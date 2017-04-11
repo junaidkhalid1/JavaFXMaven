@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="fr.sncf.controller.PersonEditDialogController">
    <children>
-      <GridPane layoutX="1.0" prefHeight="212.0" prefWidth="500.0">
+      <GridPane layoutX="1.0" prefHeight="212.0" prefWidth="500.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,7 +40,7 @@
             <TextField fx:id="birthdayField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <ButtonBar layoutX="287.0" layoutY="234.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="287.0" layoutY="234.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.rightAnchor="20.0">
         <buttons>
           <Button mnemonicParsing="false" onAction="#handleOk" text="OK" />
             <Button mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
