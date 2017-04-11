@@ -1,6 +1,8 @@
 package fr.sncf;
 	
+import java.io.File;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 import fr.sncf.controller.PersonEditDialogController;
 import fr.sncf.controller.PersonOverviewController;
@@ -10,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -54,6 +57,9 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
 
+     // Set the application icon.
+        this.primaryStage.getIcons().add(new Image("file:resources/sncf.png"));
+        
         initRootLayout();
 
         showPersonOverview();
@@ -135,6 +141,44 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+    
+    /**
+     * Returns the person file preference, i.e. the file that was last opened.
+     * The preference is read from the OS specific registry. If no such
+     * preference can be found, null is returned.
+     * 
+     * @return
+     */
+    public File getPersonFilePath() {
+        Preferences prefs = Preferences.userNodeForPackage(Main.class);
+        String filePath = prefs.get("filePath", null);
+        if (filePath != null) {
+            return new File(filePath);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Sets the file path of the currently loaded file. The path is persisted in
+     * the OS specific registry.
+     * 
+     * @param file the file or null to remove the path
+     */
+    public void setPersonFilePath(File file) {
+        Preferences prefs = Preferences.userNodeForPackage(Main.class);
+        if (file != null) {
+            prefs.put("filePath", file.getPath());
+
+            // Update the stage title.
+            primaryStage.setTitle("AddressApp - " + file.getName());
+        } else {
+            prefs.remove("filePath");
+
+            // Update the stage title.
+            primaryStage.setTitle("AddressApp");
         }
     }
 
